@@ -5,6 +5,10 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_mail import Mail, Message
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
@@ -21,15 +25,16 @@ app = Flask(__name__)
 CORS(app)
 
 # Mail Configuration
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'bslmtechsolutions@gmail.com'
-# IMPORTANT: Use your Gmail App Password here (not your regular Gmail password)
-# Generate at: https://myaccount.google.com/apppasswords
-app.config['MAIL_PASSWORD'] = 'omepudoygaofqshg'
-app.config['MAIL_DEFAULT_SENDER'] = ('BSLM Tech Solutions', 'bslmtechsolutions@gmail.com')
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'False').lower() == 'true'
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'True').lower() == 'true'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = (
+    os.getenv('MAIL_DEFAULT_SENDER_NAME', 'BSLM Tech Solutions'),
+    os.getenv('MAIL_DEFAULT_SENDER_EMAIL')
+)
 
 mail = Mail(app)
 
@@ -79,7 +84,7 @@ def send_email(data):
             
         msg = Message(
             subject=f"New Lead from BSLM Tech: {data['name']}",
-            recipients=['bslmtechsolutions@gmail.com', 'sathyaboopalan24@gmail.com'],
+            recipients=os.getenv('MAIL_RECIPIENTS', 'bslmtechsolutions@gmail.com').split(','),
             body=f"""
             Hello BSLM Team,
 
@@ -99,7 +104,7 @@ def send_email(data):
         
         logger.info("[EMAIL SENDING] Initiating mail.send()...")
         mail.send(msg)
-        logger.info(f"[EMAIL SUCCESS] Email sent successfully to bslmtechsolutions@gmail.com and sathyaboopalan24@gmail.com")
+        logger.info(f"[EMAIL SUCCESS] Email sent successfully to {os.getenv('MAIL_RECIPIENTS', 'bslmtechsolutions@gmail.com')}")
         logger.info(f"[EMAIL SUCCESS] Message ID: {data.get('id', 'N/A')} | Sender: {data['email']}")
         return True
         
@@ -219,7 +224,7 @@ def send_stored_messages():
         logger.info("[SEND-STORED] Sending formatted email report...")
         msg = Message(
             subject=f"BSLM Tech - Stored Messages Report ({len(messages)} messages)",
-            recipients=['bslmtechsolutions@gmail.com'],
+            recipients=[os.getenv('MAIL_DEFAULT_SENDER_EMAIL', 'bslmtechsolutions@gmail.com')],
             body=email_body
         )
         mail.send(msg)
@@ -227,7 +232,7 @@ def send_stored_messages():
         
         return jsonify({
             "success": True,
-            "message": f"Successfully sent {len(messages)} messages to bslmtechsolutions@gmail.com"
+            "message": f"Successfully sent {len(messages)} messages to {os.getenv('MAIL_DEFAULT_SENDER_EMAIL', 'bslmtechsolutions@gmail.com')}"
         }), 200
     
     except Exception as e:
@@ -243,11 +248,11 @@ if __name__ == '__main__':
     logger.info(f"[STARTUP] Debug mode: {os.getenv('FLASK_DEBUG', 'False')}")
     logger.info(f"[CONFIG] Mail Server: {app.config['MAIL_SERVER']}")
     logger.info(f"[CONFIG] Mail Port: {app.config['MAIL_PORT']}")
-    logger.info(f"[CONFIG] Mail Username: {app.config['MAIL_USERNAME']}")
+    logger.info(f"[CONFIG] Mail Username: {os.getenv('MAIL_USERNAME', 'Not set')}")
     logger.info(f"[CONFIG] TLS Enabled: {app.config['MAIL_USE_TLS']}")
     logger.info(f"[CONFIG] SSL Enabled: {app.config['MAIL_USE_SSL']}")
     logger.info(f"[CONFIG] Database file: {DB_FILE}")
-    logger.info("[STARTUP] All configurations loaded successfully")
+    logger.info("[STARTUP] All configurations loaded successfully from .env")
     logger.info("[STARTUP] Starting Flask server on http://localhost:5000")
     logger.info("=" * 70)
     app.run(debug=True, port=5000)
