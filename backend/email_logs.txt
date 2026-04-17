@@ -1,0 +1,41 @@
+2026-04-17 15:06:35,671 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-17 15:06:35,674 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-17 15:06:50,004 - INFO - 127.0.0.1 - - [17/Apr/2026 15:06:50] "OPTIONS /api/contact HTTP/1.1" 200 -
+2026-04-17 15:06:50,266 - INFO - [CONTACT FORM] New request received from contact form
+2026-04-17 15:06:50,268 - INFO - [FORM DATA] Name: Sathya V , Email: sathyapysellers@gmail.com
+2026-04-17 15:06:50,268 - INFO - [FORM DATA] Message length: 3 characters
+2026-04-17 15:06:50,269 - INFO - [DATABASE] Saving message to messages.json...
+2026-04-17 15:06:50,270 - INFO - [DATABASE] Attempting to save new message to database
+2026-04-17 15:06:50,275 - INFO - [DATABASE] Loaded existing database with 7 messages
+2026-04-17 15:06:50,284 - INFO - [DATABASE SUCCESS] Message saved with ID: 8, Total messages: 8
+2026-04-17 15:06:50,285 - INFO - [DATABASE SUCCESS] Message saved with ID: 8
+2026-04-17 15:06:50,287 - INFO - [EMAIL PROCESS] Starting email notification process...
+2026-04-17 15:06:50,287 - INFO - [EMAIL ATTEMPT] Preparing email for: Sathya V  (sathyapysellers@gmail.com)
+2026-04-17 15:06:50,289 - ERROR - [EMAIL FAILED] Gmail App Password not configured. Please update MAIL_PASSWORD in app.py
+2026-04-17 15:06:50,290 - WARNING - [PROCESS PARTIAL] WARNING - Message saved but email failed for Sathya V 
+2026-04-17 15:06:50,292 - INFO - 127.0.0.1 - - [17/Apr/2026 15:06:50] "POST /api/contact HTTP/1.1" 200 -
+2026-04-17 15:11:41,088 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-17 15:11:41,088 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-17 15:12:22,053 - INFO - 127.0.0.1 - - [17/Apr/2026 15:12:22] "OPTIONS /api/contact HTTP/1.1" 200 -
+2026-04-17 15:12:22,312 - INFO - [CONTACT FORM] New request received from contact form
+2026-04-17 15:12:22,314 - INFO - [FORM DATA] Name: Sathya V , Email: sathyapysellers@gmail.com
+2026-04-17 15:12:22,314 - INFO - [FORM DATA] Message length: 9 characters
+2026-04-17 15:12:22,315 - INFO - [DATABASE] Saving message to messages.json...
+2026-04-17 15:12:22,316 - INFO - [DATABASE] Attempting to save new message to database
+2026-04-17 15:12:22,321 - INFO - [DATABASE] Loaded existing database with 8 messages
+2026-04-17 15:12:22,326 - INFO - [DATABASE SUCCESS] Message saved with ID: 9, Total messages: 9
+2026-04-17 15:12:22,327 - INFO - [DATABASE SUCCESS] Message saved with ID: 9
+2026-04-17 15:12:22,328 - INFO - [EMAIL PROCESS] Starting email notification process...
+2026-04-17 15:12:22,329 - INFO - [EMAIL ATTEMPT] Preparing email for: Sathya V  (sathyapysellers@gmail.com)
+2026-04-17 15:12:22,330 - INFO - [EMAIL CONFIG] Using SMTP: smtp.gmail.com:587
+2026-04-17 15:12:22,334 - INFO - [EMAIL CONFIG] TLS: True, SSL: False
+2026-04-17 15:12:22,350 - INFO - [EMAIL SENDING] Initiating mail.send()...
+2026-04-17 15:12:26,890 - INFO - [EMAIL SUCCESS] Email sent successfully to bslmtechsolutions@gmail.com and sathyaboopalan24@gmail.com
+2026-04-17 15:12:26,891 - INFO - [EMAIL SUCCESS] Message ID: 9 | Sender: sathyapysellers@gmail.com
+2026-04-17 15:12:26,891 - INFO - [PROCESS COMPLETE] SUCCESS - All operations completed for Sathya V 
+2026-04-17 15:12:26,894 - INFO - 127.0.0.1 - - [17/Apr/2026 15:12:26] "POST /api/contact HTTP/1.1" 200 -
+2026-04-17 15:51:00,238 - INFO - 127.0.0.1 - - [17/Apr/2026 15:51:00] "[33mPOST /api/license/activate HTTP/1.1[0m" 404 -
+2026-04-17 15:56:05,602 - INFO - 127.0.0.1 - - [17/Apr/2026 15:56:05] "[33mPOST /api/license/offline/confirm HTTP/1.1[0m" 404 -
+2026-04-17 16:03:34,966 - INFO - 127.0.0.1 - - [17/Apr/2026 16:03:34] "[33mPOST /api/license/offline/confirm HTTP/1.1[0m" 404 -
