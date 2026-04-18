@@ -2,7 +2,7 @@ import React from 'react';
 import { MessageCircle } from 'lucide-react';
 
 const WhatsAppButton = () => {
-  const phoneNumber = '+916385823899';
+  const phoneNumber = '+919840459290';
   const message = 'Hello BSLM Tech! I am interested in your services.';
 
   const handleClick = () => {

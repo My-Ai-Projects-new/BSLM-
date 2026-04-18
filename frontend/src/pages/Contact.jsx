@@ -44,7 +44,7 @@ const Contact = () => {
     }
   };
   const contactInfo = [
-    { icon: <Phone className="text-primary" />, label: 'Phone', val: '+91 6385823899', link: 'tel:+916385823899' },
+    { icon: <Phone className="text-primary" />, label: 'Phone', val: '+91 9840459290', link: 'tel:+919840459290' },
     { icon: <Mail className="text-secondary" />, label: 'Email', val: 'bslmtechsolutions@gmail.com', link: 'mailto:bslmtechsolutions@gmail.com' },
     { icon: <Globe className="text-accent" />, label: 'Website', val: 'www.bslmtech.com', link: 'https://www.bslmtech.com' },
     { icon: <MapPin className="text-primary" />, label: 'Location', val: 'Poonamallee, Chennai, Tamil Nadu', link: 'https://maps.google.com/?q=Poonamallee,Chennai' },
@@ -104,7 +104,7 @@ const Contact = () => {
             </h3>
             <p className="text-slate-400 mb-6">Connect instantly with our experts via WhatsApp for a quick consultation.</p>
             <a 
-              href="https://wa.me/+916385823899" 
+              href="https://wa.me/+919840459290" 
               target="_blank" 
               rel="noopener noreferrer"
               className="px-6 py-3 bg-green-500 text-white font-bold rounded-xl flex items-center justify-center space-x-2 hover:bg-green-600 transition-all duration-300 active:scale-95"
