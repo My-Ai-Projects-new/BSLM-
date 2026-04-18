@@ -1,1 +1,2 @@
-export const API_BASE_URL = "http://localhost:5000";
+// Configuration file - Updated to use Netlify Forms
+// No backend API needed anymore

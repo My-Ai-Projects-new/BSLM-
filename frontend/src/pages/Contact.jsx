@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Globe, MessageSquare, Send, MapPin, CheckCircle2, AlertCircle } from 'lucide-react';
-import axios from 'axios';
-import { API_BASE_URL } from '../config';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -25,8 +23,15 @@ const Contact = () => {
     setStatus({ submitting: true, success: false, error: null });
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/contact`, formData);
-      if (response.data.success) {
+      // Create FormData for Netlify
+      const form = new FormData(e.target);
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(form).toString(),
+      });
+
+      if (response.ok) {
         setStatus({ submitting: false, success: true, error: null });
         setFormData({ name: '', email: '', message: '' });
       } else {
@@ -34,7 +39,7 @@ const Contact = () => {
       }
     } catch (err) {
       console.error('Contact form error:', err);
-      setStatus({ submitting: false, success: false, error: 'Server error. Please try again later.' });
+      setStatus({ submitting: false, success: false, error: 'Network error. Please try again.' });
     }
   };
 
@@ -139,7 +144,18 @@ const Contact = () => {
               </button>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form 
+              name="contact" 
+              method="POST" 
+              data-netlify="true" 
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+            >
+              <input type="hidden" name="form-name" value="contact" />
+              <p hidden>
+                <label>Don't fill this out: <input name="bot-field" /></label>
+              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Full Name</label>
