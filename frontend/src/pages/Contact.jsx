@@ -19,36 +19,37 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus({ submitting: true, success: false, error: null });
+  e.preventDefault();
+  setStatus({ submitting: true, success: false, error: null });
 
-    try {
-      // Create FormData for Netlify Forms
-      const form = new FormData(e.target);
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(form).toString(),
-      });
+  try {
+    const form = e.target;
 
-      if (response.ok || response.status === 404) {
-        // Status 200 = Netlify production
-        // Status 404 = Local development (form not processed, but that's OK)
-        setStatus({ submitting: false, success: true, error: null });
-        setFormData({ name: '', email: '', message: '' });
-        console.log('Form submitted:', { name: formData.name, email: formData.email, message: formData.message });
-      } else {
-        setStatus({ submitting: false, success: false, error: 'Failed to send message.' });
-      }
-    } catch (err) {
-      console.error('Contact form error:', err);
-      // For local development, treat network errors as success
+    const formDataEncoded = new URLSearchParams({
+      "form-name": "contact",
+      name: formData.name,
+      email: formData.email,
+      message: formData.message
+    }).toString();
+
+    const response = await fetch("/?no-cache=1", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: formDataEncoded,
+    });
+
+    if (response.ok) {
       setStatus({ submitting: false, success: true, error: null });
-      setFormData({ name: '', email: '', message: '' });
-      console.log('Form data logged locally:', formData);
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      setStatus({ submitting: false, success: false, error: "Failed to send message." });
     }
-  };
 
+  } catch (error) {
+    console.error(error);
+    setStatus({ submitting: false, success: false, error: "Something went wrong." });
+  }
+};
   const contactInfo = [
     { icon: <Phone className="text-primary" />, label: 'Phone', val: '+91 6385823899', link: 'tel:+916385823899' },
     { icon: <Mail className="text-secondary" />, label: 'Email', val: 'bslmtechsolutions@gmail.com', link: 'mailto:bslmtechsolutions@gmail.com' },
