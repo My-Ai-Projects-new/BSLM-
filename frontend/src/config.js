@@ -1,2 +1,4 @@
-// Configuration file - Updated to use Netlify Forms
-// No backend API needed anymore
+// API Configuration
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+console.log('API URL:', API_BASE_URL);

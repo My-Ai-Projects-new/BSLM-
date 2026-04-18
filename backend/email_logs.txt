@@ -69,3 +69,24 @@
 2026-04-18 16:29:29,367 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 2026-04-18 16:29:29,367 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-18 17:02:29,026 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-18 17:02:29,027 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-18 17:02:55,879 - INFO - 127.0.0.1 - - [18/Apr/2026 17:02:55] "OPTIONS /api/contact HTTP/1.1" 200 -
+2026-04-18 17:02:56,143 - INFO - [CONTACT FORM] New request received from contact form
+2026-04-18 17:02:56,145 - INFO - [FORM DATA] Name: Sathya V , Email: sathyapysellers@gmail.com
+2026-04-18 17:02:56,145 - INFO - [FORM DATA] Message length: 2 characters
+2026-04-18 17:02:56,146 - INFO - [DATABASE] Saving message to messages.json...
+2026-04-18 17:02:56,147 - INFO - [DATABASE] Attempting to save new message to database
+2026-04-18 17:02:56,183 - INFO - [DATABASE] Loaded existing database with 10 messages
+2026-04-18 17:02:56,187 - INFO - [DATABASE SUCCESS] Message saved with ID: 11, Total messages: 11
+2026-04-18 17:02:56,188 - INFO - [DATABASE SUCCESS] Message saved with ID: 11
+2026-04-18 17:02:56,188 - INFO - [EMAIL PROCESS] Starting email notification process...
+2026-04-18 17:02:56,188 - INFO - [EMAIL ATTEMPT] Preparing email for: Sathya V  (sathyapysellers@gmail.com)
+2026-04-18 17:02:56,188 - INFO - [EMAIL CONFIG] Using SMTP: smtp.gmail.com:587
+2026-04-18 17:02:56,189 - INFO - [EMAIL CONFIG] TLS: True, SSL: False
+2026-04-18 17:02:56,195 - INFO - [EMAIL SENDING] Initiating mail.send()...
+2026-04-18 17:03:00,744 - INFO - [EMAIL SUCCESS] Email sent successfully to bslmtechsolutions@gmail.com,sathyaboopalan24@gmail.com
+2026-04-18 17:03:00,745 - INFO - [EMAIL SUCCESS] Message ID: 11 | Sender: sathyapysellers@gmail.com
+2026-04-18 17:03:00,746 - INFO - [PROCESS COMPLETE] SUCCESS - All operations completed for Sathya V 
+2026-04-18 17:03:00,747 - INFO - 127.0.0.1 - - [18/Apr/2026 17:03:00] "POST /api/contact HTTP/1.1" 200 -

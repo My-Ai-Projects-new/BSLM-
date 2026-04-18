@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Globe, MessageSquare, Send, MapPin, CheckCircle2, AlertCircle } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -19,37 +20,29 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setStatus({ submitting: true, success: false, error: null });
+    e.preventDefault();
+    setStatus({ submitting: true, success: false, error: null });
 
-  try {
-    const form = e.target;
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-    const formDataEncoded = new URLSearchParams({
-      "form-name": "contact",
-      name: formData.name,
-      email: formData.email,
-      message: formData.message
-    }).toString();
+      const data = await response.json();
 
-    const response = await fetch("/?no-cache=1", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: formDataEncoded,
-    });
-
-    if (response.ok) {
-      setStatus({ submitting: false, success: true, error: null });
-      setFormData({ name: "", email: "", message: "" });
-    } else {
-      setStatus({ submitting: false, success: false, error: "Failed to send message." });
+      if (response.ok && data.success) {
+        setStatus({ submitting: false, success: true, error: null });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus({ submitting: false, success: false, error: data.error || 'Failed to send message.' });
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      setStatus({ submitting: false, success: false, error: 'Network error. Please try again.' });
     }
-
-  } catch (error) {
-    console.error(error);
-    setStatus({ submitting: false, success: false, error: "Something went wrong." });
-  }
-};
+  };
   const contactInfo = [
     { icon: <Phone className="text-primary" />, label: 'Phone', val: '+91 6385823899', link: 'tel:+916385823899' },
     { icon: <Mail className="text-secondary" />, label: 'Email', val: 'bslmtechsolutions@gmail.com', link: 'mailto:bslmtechsolutions@gmail.com' },
@@ -152,17 +145,9 @@ const Contact = () => {
             </motion.div>
           ) : (
             <form 
-              name="contact" 
-              method="POST" 
-              data-netlify="true" 
-              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit} 
               className="space-y-6"
             >
-              <input type="hidden" name="form-name" value="contact" />
-              <p hidden>
-                <label>Don't fill this out: <input name="bot-field" /></label>
-              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Full Name</label>
