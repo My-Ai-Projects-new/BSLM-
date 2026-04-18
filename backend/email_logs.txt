@@ -66,3 +66,6 @@
 2026-04-18 15:42:20,923 - INFO - [EMAIL SUCCESS] Message ID: 10 | Sender: sathyapysellers@gmail.com
 2026-04-18 15:42:20,923 - INFO - [PROCESS COMPLETE] SUCCESS - All operations completed for Sathya V 
 2026-04-18 15:42:20,925 - INFO - 127.0.0.1 - - [18/Apr/2026 15:42:20] "POST /api/contact HTTP/1.1" 200 -
+2026-04-18 16:29:29,367 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-18 16:29:29,367 - INFO - [33mPress CTRL+C to quit[0m
